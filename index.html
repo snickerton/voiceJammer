@@ -4,10 +4,30 @@
 <title> Voice Jammer </title>
 </head>
 <body>
+<audio autoplay></audio>
 <h2 id="output">Should appear here</h2>
 </body>
 </html>
 <script>
+
+function hasGetUserMedia() {
+  return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
+if (hasGetUserMedia()) {//All set!
+       
+       document.getElementById("output").innerHTML = "audio found";       
+    navigator.getUserMedia({audio: true}, function(localMediaStream) {
+    var audio = document.querySelector('audio');
+    audio.src = window.URL.createObjectURL(localMediaStream);
+       
+}
+} else {
+  alert('getUserMedia() is not supported in your browser');
+}
+
+/* SCREW YOU GOOGLE YOUR SHIT DOESN'T WORK
 if ('SpeechRecognition' in window) {
        document.getElementById("output").innerHTML = "SR avaliable";
 
@@ -26,6 +46,10 @@ recognizer.onresult = function(e){
 recognizer.start();
 var msg = new SpeechSynthesisUtterance(document.getElementById("output").innerHTML);
 window.speechSynthesis.speak(msg);
+*/
+
+
+
 </script>
 <style type="text/css">
 h2 {
