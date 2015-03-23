@@ -10,7 +10,7 @@
 </html>
 <script>
 
-function hasGetUserMedia() {
+/*function hasGetUserMedia() {
   return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
             navigator.mozGetUserMedia || navigator.msGetUserMedia);
 }
@@ -21,13 +21,34 @@ if (hasGetUserMedia()) {//All set!
     
     navigator.getUserMedia({audio: true}, function(localMediaStream) {
     var audio = document.querySelector('audio');
-    audio.src = window.URL.createObjectURL(localMediaStream);
+    audio.src = window.URL.createObjectURL(localMediaStream);  
+    video.onloadedmetadata = function(e) {
+      // Ready to go. Do some stuff.
+    };
+  }, errorCallback);
        });
 } 
 else {
   alert('getUserMedia() is not supported in your browser');
-}
+}*/
 
+
+
+
+navigator.getUserMedia  = navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia;
+
+var video = document.querySelector('video');
+
+if (navigator.getUserMedia) {
+  navigator.getUserMedia({audio: true, video: true}, function(stream) {
+    video.src = window.URL.createObjectURL(stream);
+  }, errorCallback);
+} else {
+  alert('getUserMedia() is not supported in your browser');
+}
 /* SCREW YOU GOOGLE YOUR SHIT DOESN'T WORK
 if ('SpeechRecognition' in window) {
        document.getElementById("output").innerHTML = "SR avaliable";
