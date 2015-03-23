@@ -8,6 +8,11 @@
 </body>
 </html>
 <script>
+if ('SpeechRecognition' in window) {
+       document.getElementById("output").innerHTML = "SR avaliable";
+
+  
+}
 var recognizer = new SpeechRecognition();
 recognizer.continous = true;
 recognizer.interimResults = true;
