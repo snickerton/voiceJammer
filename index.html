@@ -13,6 +13,7 @@ recognizer.continous = true;
 recognizer.interimResults = true;
 recognizer.onresult = function(e){
   if(e.results.length){
+    console.log(e.results);
      var li = e.results.resultIndex;
      document.getElementById("output").innerHTML = "What you said:" + e.results[li][0].transcript;
   }
