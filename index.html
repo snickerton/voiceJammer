@@ -1,4 +1,28 @@
+<!DOCTYPE html>
 <html>
 <head>
-
+<title> Voice Jammer </title>
+</head>
+<body>
+<h2 id="output"></h2>
+</body>
 </html>
+<script>
+var recognizer = new SpeechRecognition();
+recognizer.continous = true;
+recognizer.interimResults = true;
+recognizer.onresult = function(e){
+  if(e.results.length){
+     var li = e.results.resultIndex;
+     document.getElementById("output").innerHTML = e.results[li][0].transcript;
+  }
+};
+recognizer.start();
+var msg = new SpeechSynthesisUtterance(document.getElementById("output").innerHTML);
+window.speechSynthesis.speak(msg);
+</script>
+<style type="text/css">
+h2 {
+font-family: "Monotype Corsiva", cursive;
+}
+</style>
