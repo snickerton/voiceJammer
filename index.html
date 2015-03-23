@@ -18,12 +18,13 @@ function hasGetUserMedia() {
 if (hasGetUserMedia()) {//All set!
        
        document.getElementById("output").innerHTML = "audio found";       
+    
     navigator.getUserMedia({audio: true}, function(localMediaStream) {
     var audio = document.querySelector('audio');
     audio.src = window.URL.createObjectURL(localMediaStream);
-       
-}
-} else {
+       });
+} 
+else {
   alert('getUserMedia() is not supported in your browser');
 }
 
